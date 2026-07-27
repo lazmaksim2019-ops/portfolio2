@@ -585,24 +585,25 @@ section {
   justify-content: center;
   transition: all 0.3s;
   color: var(--text-secondary);
+  filter: grayscale(100%);
 }
 
 .tech-icon svg {
   width: 24px;
   height: 24px;
-  filter: grayscale(100%);
   transition: filter 0.3s;
 }
 
 .tech-icon:hover {
-  border-color: var(--purple);
+  border-color: var(--brand, var(--purple));
   background: rgba(139, 92, 246, 0.1);
   transform: translateY(-3px);
-  color: var(--text-primary);
+  color: var(--brand, var(--text-primary));
+  filter: grayscale(0%);
 }
 
 .tech-icon:hover svg {
-  filter: grayscale(0%);
+  filter: grayscale(0%) drop-shadow(0 0 6px var(--brand, rgba(139, 92, 246, 0.4)));
 }
 
 /* ─── SKILLS ─── */

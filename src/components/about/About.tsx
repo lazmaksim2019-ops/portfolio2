@@ -45,14 +45,14 @@ function CountUp({ target, suffix = "" }: { target: number; suffix?: string }) {
 }
 
 const techIcons = [
-  { title: "Python", icon: <PythonIcon /> },
-  { title: "FastAPI", icon: <FastAPIIcon /> },
-  { title: "Next.js", icon: <NextJSIcon /> },
-  { title: "React", icon: <ReactIcon /> },
-  { title: "TypeScript", icon: <TSIcon /> },
-  { title: "n8n", icon: <N8NIcon /> },
-  { title: "PostgreSQL", icon: <PGIcon /> },
-  { title: "Docker", icon: <DockerIcon /> },
+  { title: "Python", icon: <PythonIcon />, brand: "#3776AB" },
+  { title: "FastAPI", icon: <FastAPIIcon />, brand: "#009688" },
+  { title: "Next.js", icon: <NextJSIcon />, brand: "#FFFFFF" },
+  { title: "React", icon: <ReactIcon />, brand: "#61DAFB" },
+  { title: "TypeScript", icon: <TSIcon />, brand: "#3178C6" },
+  { title: "n8n", icon: <N8NIcon />, brand: "#EA4B71" },
+  { title: "PostgreSQL", icon: <PGIcon />, brand: "#4169E1" },
+  { title: "Docker", icon: <DockerIcon />, brand: "#2496ED" },
 ];
 
 export function About() {
@@ -142,7 +142,12 @@ export function About() {
             <Reveal>
               <div className="tech-stack">
                 {techIcons.map((t) => (
-                  <div key={t.title} className="tech-icon" title={t.title}>
+                  <div
+                    key={t.title}
+                    className="tech-icon"
+                    title={t.title}
+                    style={{ "--brand": t.brand } as React.CSSProperties}
+                  >
                     {t.icon}
                   </div>
                 ))}
