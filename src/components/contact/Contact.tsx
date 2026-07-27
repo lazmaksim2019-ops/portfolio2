@@ -22,21 +22,21 @@ async function sendContact(
   }
 
   try {
-    const res = await fetch(
-      `https://formsubmit.co/ajax/${siteConfig.email}`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({
-          name,
-          email,
-          message,
-          _subject: `Портфолио — ${name}`,
-        }),
-      }
-    );
+    const res = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Accept: "application/json" },
+      body: JSON.stringify({
+        access_key: "87aaeb35-cdf6-4ae2-9073-e930c3c5fcfb",
+        name,
+        email,
+        message,
+        subject: `Портфолио — ${name}`,
+        from_name: "Портфолио сайта",
+      }),
+    });
 
-    if (!res.ok) return { ok: false, error: "Ошибка отправки, попробуйте позже" };
+    const data = await res.json();
+    if (!data.success) return { ok: false, error: "Ошибка отправки, попробуйте позже" };
     return { ok: true, error: null };
   } catch {
     return { ok: false, error: "Нет соединения, попробуйте позже" };
