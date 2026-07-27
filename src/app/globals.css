@@ -319,8 +319,9 @@ body {
   font-family: var(--font-heading);
   font-size: clamp(3rem, 8vw, 7rem);
   font-weight: 700;
-  line-height: 1.05;
-  letter-spacing: -0.03em;
+  line-height: 1.02;
+  letter-spacing: 0;
+  text-wrap: balance;
   margin-bottom: 16px;
   background: var(--gradient-text);
   -webkit-background-clip: text;
@@ -602,6 +603,7 @@ section {
 .skills-bento {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 1fr;
   gap: 16px;
 }
 
@@ -755,6 +757,7 @@ section {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
+  margin-top: auto;
   margin-bottom: 16px;
 }
 
