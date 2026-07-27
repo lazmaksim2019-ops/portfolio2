@@ -587,6 +587,13 @@ section {
   color: var(--text-secondary);
 }
 
+.tech-icon svg {
+  width: 24px;
+  height: 24px;
+  filter: grayscale(100%);
+  transition: filter 0.3s;
+}
+
 .tech-icon:hover {
   border-color: var(--purple);
   background: rgba(139, 92, 246, 0.1);
@@ -594,9 +601,8 @@ section {
   color: var(--text-primary);
 }
 
-.tech-icon svg {
-  width: 24px;
-  height: 24px;
+.tech-icon:hover svg {
+  filter: grayscale(0%);
 }
 
 /* ─── SKILLS ─── */
