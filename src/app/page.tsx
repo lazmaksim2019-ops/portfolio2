@@ -10,6 +10,7 @@ import { Projects } from "@/components/projects/Projects";
 import { Experience } from "@/components/experience/Experience";
 import { Contact } from "@/components/contact/Contact";
 import { Cursor } from "@/components/ui/Cursor";
+import { ScrollProgress } from "@/components/ui/ScrollProgress";
 import { useScrollSpy } from "@/lib/useScrollSpy";
 
 export default function Home() {
@@ -20,6 +21,8 @@ export default function Home() {
   return (
     <>
       {!reduce && <Cursor />}
+      <ScrollProgress />
+      <div className="noise-overlay" />
       <Navbar activeSection={activeSection} />
       <main>
         <Hero />

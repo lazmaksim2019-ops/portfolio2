@@ -33,19 +33,20 @@ export function Navbar({ activeSection }: { activeSection: Section }) {
             Александр Лазаренко
           </a>
           <div className="nav-right">
-            <ul className="nav-links">
+            <ul className={cn("nav-links", menuOpen && "open")}>
               {navItems.map((item) => (
                 <li key={item.id}>
                   <a
                     href={`#${item.id}`}
                     style={{ color: activeSection === item.id ? "var(--text-primary)" : undefined }}
+                    onClick={closeMenu}
                   >
                     {item.label}
                   </a>
                 </li>
               ))}
             </ul>
-            <a href="#contact" className="nav-cta">
+            <a href="#contact" className="nav-cta" onClick={closeMenu}>
               Написать
             </a>
           </div>
