@@ -1,6 +1,6 @@
 <div align="center">
 
-# Портфолио-платформа
+# Портфолио-Александр Лазаренко
 
 **Next.js 16 · React 19 · TypeScript 5 · motion · Tailwind v4**
 
