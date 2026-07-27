@@ -6,7 +6,7 @@
 
 Fullstack-разработчик и инженер по ИИ-автоматизации
 
-[![Live Demo](https://img.shields.io/badge/Live_Demo-portfolio2-s9wm.onrender.com-brightgreen?style=for-the-badge&logo=vercel)](https://portfolio2-s9wm.onrender.com)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-click_here-brightgreen?style=for-the-badge)](https://portfolio2-s9wm.onrender.com)
 
 [![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js)](https://nextjs.org)
 [![React](https://img.shields.io/badge/React-19-61DAFB?logo=react)](https://react.dev)
