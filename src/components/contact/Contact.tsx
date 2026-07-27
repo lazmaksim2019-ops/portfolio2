@@ -6,15 +6,41 @@ import { siteConfig } from "@/content/site";
 
 type FormState = {
   ok: boolean;
-  errors: Record<string, string[]> | null;
+  error: string | null;
 } | null;
 
 async function sendContact(
   _prev: FormState,
-  _formData: FormData
+  formData: FormData
 ): Promise<FormState> {
-  // Placeholder — implement with Server Action + Resend or formsubmit
-  return { ok: true, errors: null };
+  const name = formData.get("name") as string;
+  const email = formData.get("email") as string;
+  const message = formData.get("message") as string;
+
+  if (!name || !email || !message) {
+    return { ok: false, error: "Заполните все поля" };
+  }
+
+  try {
+    const res = await fetch(
+      `https://formsubmit.co/ajax/${siteConfig.email}`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          name,
+          email,
+          message,
+          _subject: `Портфолио — ${name}`,
+        }),
+      }
+    );
+
+    if (!res.ok) return { ok: false, error: "Ошибка отправки, попробуйте позже" };
+    return { ok: true, error: null };
+  } catch {
+    return { ok: false, error: "Нет соединения, попробуйте позже" };
+  }
 }
 
 export function Contact() {
@@ -76,10 +102,7 @@ export function Contact() {
             </div>
           </Reveal>
           <Reveal>
-            <form
-              action={action}
-              className="contact-form"
-            >
+            <form action={action} className="contact-form">
               <div className="form-group">
                 <label htmlFor="name">Имя</label>
                 <input
@@ -124,6 +147,11 @@ export function Contact() {
               {state?.ok && (
                 <p role="status" style={{ color: "#22C55E" }}>
                   Спасибо! Свяжусь в ближайшее время.
+                </p>
+              )}
+              {state?.error && (
+                <p role="status" style={{ color: "#EF4444" }}>
+                  {state.error}
                 </p>
               )}
             </form>
