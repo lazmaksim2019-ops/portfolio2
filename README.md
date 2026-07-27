@@ -60,8 +60,8 @@ Fullstack-разработчик и инженер по ИИ-автоматиз�
 
 | Слой | Решение | Почему именно это |
 |------|---------|-------------------|
-| **Фреймворк** | Next.js 16, App Router | SSR/SSG из коробки, Server Components, `generateMetadata` для SEO, `next/image` и `next/font` для оптимизации — всё, что ищут рекрутёры, и Lighthouse |
-| **React** | React 19 | Actions, `useActionState`, Server Components — то, что спрашивают на собесах в 2026 |
+| **Фреймворк** | Next.js 16, App Router | SSR/SSG из коробки, Server Components, `generateMetadata` для SEO, `next/image` и `next/font` для оптимизации — всё, что любят рекрутеры, и Lighthouse |
+| **React** | React 19 | Actions, `useActionState`, Server Components — то, что спрашивают на собеседованиях в 2026 |
 | **Язык** | TypeScript 5, `strict: true` | Без `any`. Typed props, typed контент, typed API — именно это и есть «доказательство TypeScript» |
 | **Стили** | Tailwind v4 + авторский CSS | Tailwind для утилит, кастомный CSS для дизайна-системы — не скатываемся в «blanket rounded-2xl» |
 | **Анимации** | motion (ex Framer Motion) | `whileInView` + `useReducedMotion` — reveal-анимации с поддержкой `prefers-reduced-motion`, без ручного IntersectionObserver |
