@@ -607,6 +607,13 @@ section {
   gap: 16px;
 }
 
+.skills-bento > div,
+.projects-bento > div {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
 .skill-card {
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
@@ -617,6 +624,7 @@ section {
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   display: flex;
   flex-direction: column;
+  height: 100%;
   min-height: 230px;
 }
 
@@ -698,6 +706,7 @@ section {
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   display: flex;
   flex-direction: column;
+  height: 100%;
 }
 
 .project-card:hover {
