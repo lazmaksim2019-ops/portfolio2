@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useInView } from "motion/react";
+import Image from "next/image";
 import { Reveal } from "@/components/ui/Reveal";
 import {
   PythonIcon,
@@ -69,7 +70,14 @@ export function About() {
         <div className="about-grid">
           <Reveal>
             <div className="about-avatar">
-              <div className="avatar-placeholder">АЛ</div>
+              <Image
+                src="/me.jpg"
+                alt="Александр Лазаренко"
+                width={400}
+                height={400}
+                style={{ width: "100%", height: "auto", borderRadius: "var(--radius)", objectFit: "cover" }}
+                priority
+              />
             </div>
           </Reveal>
           <div className="about-text">
