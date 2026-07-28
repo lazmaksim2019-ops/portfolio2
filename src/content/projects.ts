@@ -22,8 +22,8 @@ export const projects: Project[] = [
     index: "02",
     title: "AI SaaS-оптимизатор для селлеров",
     summary:
-      "Генерация SEO-контента и анализ изображений для маркетплейсов. Next.js + FastAPI + Gemini.",
-    stack: ["Next.js", "FastAPI", "Gemini"],
+      "Генерация SEO-контента и анализ изображений для маркетплейсов. FastAPI + React + Gemini.",
+    stack: ["FastAPI", "React", "Gemini"],
     accent: "teal",
     year: 2025,
     links: [
@@ -70,7 +70,7 @@ export const projects: Project[] = [
     index: "05",
     title: "B2B-портал с ролевой моделью",
     summary:
-      "Смена ролей Клиент/Менеджер, аналитика на Recharts, авторизация и RBAC.",
+      "Смена ролей Клиент/Менеджер, аналитика на Recharts, Tailwind CSS v4.",
     stack: ["Next.js 16", "React 19", "Recharts"],
     accent: "pink",
     year: 2025,
