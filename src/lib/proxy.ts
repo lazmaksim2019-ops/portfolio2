@@ -1,4 +1,4 @@
-import { ProxyAgent } from "undici";
+import { ProxyAgent, fetch as proxiedFetch } from "undici";
 
 function buildProxyUrl(): string | null {
   const host = process.env.PROXY_HOST;
@@ -20,7 +20,11 @@ export async function fetchViaProxy(
   if (!proxyUrl) return fetch(url, init);
   if (!proxyAgent) proxyAgent = new ProxyAgent(proxyUrl);
   try {
-    return await fetch(url, { ...init, dispatcher: proxyAgent } as RequestInit);
+    const res = await proxiedFetch(
+      url,
+      { ...init, dispatcher: proxyAgent } as unknown as Parameters<typeof proxiedFetch>[1]
+    );
+    return res as unknown as Response;
   } catch {
     return fetch(url, init);
   }

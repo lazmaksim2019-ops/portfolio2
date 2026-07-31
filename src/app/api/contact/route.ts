@@ -2,8 +2,6 @@ import { fetchViaProxy } from "@/lib/proxy";
 
 export const runtime = "nodejs";
 
-const FALLBACK_KEY = "87aaeb35-cdf6-4ae2-9073-e930c3c5fcfb";
-
 export async function POST(req: Request) {
   const formData = await req.formData();
   const name = String(formData.get("name") ?? "").trim();
@@ -14,24 +12,34 @@ export async function POST(req: Request) {
     return Response.json({ ok: false, error: "Заполните все поля" });
   }
 
-  const accessKey = process.env.WEB3FORMS_KEY ?? FALLBACK_KEY;
+  const token = process.env.TELEGRAM_BOT_TOKEN;
+  const chatId = process.env.TELEGRAM_CHAT_ID;
+
+  if (!token || !chatId) {
+    return Response.json({ ok: false, error: "Сервер не настроен" });
+  }
+
+  const text = [
+    "Новое сообщение с портфолио",
+    "",
+    `Имя: ${name}`,
+    `Email: ${email}`,
+    "",
+    message,
+  ].join("\n");
 
   try {
-    const res = await fetchViaProxy("https://api.web3forms.com/submit", {
-      method: "POST",
-      headers: { "Content-Type": "application/json", Accept: "application/json" },
-      body: JSON.stringify({
-        access_key: accessKey,
-        name,
-        email,
-        message,
-        subject: `Портфолио — ${name}`,
-        from_name: "Портфолио сайта",
-      }),
-    });
+    const res = await fetchViaProxy(
+      `https://api.telegram.org/bot${token}/sendMessage`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ chat_id: chatId, text }),
+      }
+    );
 
     const data = await res.json();
-    if (!data.success) {
+    if (!res.ok || !data.ok) {
       return Response.json({ ok: false, error: "Ошибка отправки, попробуйте позже" });
     }
     return Response.json({ ok: true, error: null });
