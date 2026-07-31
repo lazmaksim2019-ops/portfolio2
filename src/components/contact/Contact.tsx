@@ -22,21 +22,15 @@ async function sendContact(
   }
 
   try {
-    const res = await fetch("https://api.web3forms.com/submit", {
+    const res = await fetch("/api/contact", {
       method: "POST",
-      headers: { "Content-Type": "application/json", Accept: "application/json" },
-      body: JSON.stringify({
-        access_key: "87aaeb35-cdf6-4ae2-9073-e930c3c5fcfb",
-        name,
-        email,
-        message,
-        subject: `Портфолио — ${name}`,
-        from_name: "Портфолио сайта",
-      }),
+      body: formData,
     });
 
     const data = await res.json();
-    if (!data.success) return { ok: false, error: "Ошибка отправки, попробуйте позже" };
+    if (!res.ok || !data.ok) {
+      return { ok: false, error: data.error ?? "Ошибка отправки, попробуйте позже" };
+    }
     return { ok: true, error: null };
   } catch {
     return { ok: false, error: "Нет соединения, попробуйте позже" };
