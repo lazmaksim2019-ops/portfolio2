@@ -1,9 +1,7 @@
 function siteUrl(): string {
   const explicit = process.env.NEXT_PUBLIC_SITE_URL;
   if (explicit) return explicit;
-  const vercel = process.env.VERCEL_PROJECT_PRODUCTION_URL;
-  if (vercel) return `https://${vercel}`;
-  return "https://alexander-lazarenko.dev";
+  return "https://lazalex.vercel.app";
 }
 
 export const siteConfig = {
