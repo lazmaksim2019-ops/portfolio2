@@ -2,51 +2,51 @@ import type { SkillGroup } from "@/types/content";
 
 export const skills: SkillGroup[] = [
   {
-    id: "backend",
-    title: "Backend & API",
-    icon: "backend",
-    description:
-      "Проектирую высоконагруженные API-серверы, REST API, интеграции с внешними сервисами и базами данных.",
-    tags: ["Python", "FastAPI", "SQLAlchemy", "REST API"],
-  },
-  {
-    id: "frontend",
-    title: "Frontend",
+    id: "web",
+    title: "Web",
     icon: "frontend",
     description:
-      "Современный фронтенд с SSR/SSG, типизацией и адаптивными интерфейсами.",
+      "Сайты, лендинги, web-приложения, дашборды, личные кабинеты, MVP.",
     tags: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
-  },
-  {
-    id: "ai",
-    title: "AI & Автоматизация",
-    icon: "ai",
-    description:
-      "AI-компоненты в бизнес-процессах: обработка текстов, классификация, генерация контента, пайплайны.",
-    tags: ["n8n", "Gemini API", "Prompt Engineering", "Webhooks"],
-  },
-  {
-    id: "database",
-    title: "Базы данных",
-    icon: "database",
-    description:
-      "Проектирование и оптимизация БД под автоматизации и веб-приложения.",
-    tags: ["PostgreSQL", "MySQL", "pgvector"],
-  },
-  {
-    id: "devops",
-    title: "DevOps & Инфраструктура",
-    icon: "devops",
-    description:
-      "Контейнеризация, CI/CD, деплой и масштабирование приложений.",
-    tags: ["Docker", "Git", "Vercel", "Railway"],
   },
   {
     id: "telegram",
     title: "Telegram",
     icon: "telegram",
     description:
-      "Боты, Mini Apps, WebApps для взаимодействия с автоматизациями.",
-    tags: ["Bot API", "WebApps", "Mini Apps"],
+      "Боты, Mini Apps, WebApps, webhook-интеграции с бизнес-процессами.",
+    tags: ["Bot API", "Mini Apps", "WebApps", "Webhooks"],
+  },
+  {
+    id: "ai",
+    title: "AI",
+    icon: "ai",
+    description:
+      "LLM-функции в продукте: тексты, изображения, классификация, генерация, RAG.",
+    tags: ["Gemini API", "RAG", "pgvector", "Prompt Engineering"],
+  },
+  {
+    id: "integrations",
+    title: "Integrations",
+    icon: "backend",
+    description:
+      "REST API, webhooks, OAuth, JSON, подключение внешних сервисов.",
+    tags: ["Python", "FastAPI", "REST API", "SQLAlchemy"],
+  },
+  {
+    id: "automation",
+    title: "Automation",
+    icon: "devops",
+    description:
+      "n8n-сценарии, ETL, уведомления, рутинные процессы под ключ.",
+    tags: ["n8n", "ETL", "PostgreSQL", "Docker"],
+  },
+  {
+    id: "rescue",
+    title: "Code rescue",
+    icon: "database",
+    description:
+      "Баги, рефакторинг, чужой и AI-generated код, недостающие интеграции.",
+    tags: ["Refactoring", "Legacy", "Tests", "CI"],
   },
 ];

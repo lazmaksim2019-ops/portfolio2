@@ -24,6 +24,7 @@ export function Cursor() {
       mousePos.current = { x: e.clientX, y: e.clientY };
       dot.style.left = e.clientX + "px";
       dot.style.top = e.clientY + "px";
+      document.body.classList.add("cursor-on");
     };
 
     let raf: number;

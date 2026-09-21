@@ -1,4 +1,4 @@
-export type ProjectLink = { label: "GitHub" | "Demo" | "Case"; href: string };
+export type ProjectLink = { label: "GitHub" | "Demo" | "Case" | "Продукт"; href: string };
 
 export type AccentColor = "teal" | "amber" | "violet" | "green" | "pink" | "blue";
 
@@ -11,6 +11,12 @@ export interface Project {
   links: ProjectLink[];
   accent: AccentColor;
   year: number;
+  kind?: string;
+  role?: string;
+  status?: string;
+  featured?: boolean;
+  image?: string;
+  imageAlt?: string;
 }
 
 export interface SkillGroup {

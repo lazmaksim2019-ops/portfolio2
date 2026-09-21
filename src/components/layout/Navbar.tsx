@@ -2,14 +2,16 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { cn } from "@/lib/utils";
+import { siteConfig } from "@/content/site";
 
-type Section = "about" | "skills" | "projects" | "experience" | "contact";
+type Section = "projects" | "skills" | "process" | "formats" | "about" | "contact";
 
 const navItems: { id: Section; label: string }[] = [
-  { id: "about", label: "Обо мне" },
-  { id: "skills", label: "Навыки" },
   { id: "projects", label: "Проекты" },
-  { id: "experience", label: "Опыт" },
+  { id: "skills", label: "Что делаю" },
+  { id: "process", label: "Как работаю" },
+  { id: "formats", label: "Форматы" },
+  { id: "about", label: "Обо мне" },
   { id: "contact", label: "Контакты" },
 ];
 
@@ -46,13 +48,20 @@ export function Navbar({ activeSection }: { activeSection: Section }) {
                 </li>
               ))}
             </ul>
-            <a href="#contact" className="nav-cta" onClick={closeMenu}>
-              Написать
+            <a
+              href={siteConfig.telegram}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="nav-cta"
+              onClick={closeMenu}
+            >
+              Передать задачу
             </a>
           </div>
           <button
             className={cn("hamburger", menuOpen && "active")}
             aria-label="Меню"
+            aria-expanded={menuOpen}
             onClick={() => setMenuOpen(!menuOpen)}
           >
             <span />

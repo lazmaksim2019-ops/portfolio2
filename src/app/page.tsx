@@ -9,13 +9,20 @@ import { Skills } from "@/components/skills/Skills";
 import { Projects } from "@/components/projects/Projects";
 import { Experience } from "@/components/experience/Experience";
 import { Contact } from "@/components/contact/Contact";
+import {
+  Engagement,
+  WhyMe,
+  Process,
+  AgencyCta,
+  Faq,
+} from "@/components/contract/ContractSections";
 import { Cursor } from "@/components/ui/Cursor";
 import { ScrollProgress } from "@/components/ui/ScrollProgress";
 import { useScrollSpy } from "@/lib/useScrollSpy";
 
 export default function Home() {
   const reduce = useReducedMotion();
-  const sections = ["about", "skills", "projects", "experience", "contact"] as const;
+  const sections = ["projects", "skills", "process", "formats", "about", "contact"] as const;
   const activeSection = useScrollSpy(sections);
 
   return (
@@ -26,10 +33,15 @@ export default function Home() {
       <Navbar activeSection={activeSection} />
       <main>
         <Hero />
-        <About />
+        <Engagement />
         <Skills />
         <Projects />
+        <WhyMe />
+        <Process />
+        <AgencyCta />
+        <About />
         <Experience />
+        <Faq />
         <Contact />
       </main>
       <Footer />

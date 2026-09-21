@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-type Section = "about" | "skills" | "projects" | "experience" | "contact";
+type Section = "projects" | "skills" | "process" | "formats" | "about" | "contact";
 
 export function useScrollSpy(ids: readonly Section[]): Section {
   const [active, setActive] = useState<Section>("about");

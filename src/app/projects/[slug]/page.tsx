@@ -1,7 +1,9 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { projects } from "@/content/projects";
 import { cases } from "@/content/cases";
+import { siteConfig } from "@/content/site";
 import type { Metadata } from "next";
 
 function CaseSection({
@@ -42,7 +44,11 @@ function CaseSection({
 }
 
 export function generateStaticParams() {
-  return projects.map((p) => ({ slug: p.slug }));
+  const slugs = new Set([
+    ...projects.map((p) => p.slug),
+    ...cases.map((c) => c.slug),
+  ]);
+  return [...slugs].map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({
@@ -52,13 +58,19 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const project = projects.find((x) => x.slug === slug);
-  if (!project) return {};
+  const caseData = cases.find((x) => x.slug === slug);
+  if (!project && !caseData) return {};
+  const title = project
+    ? `${project.title} — кейс · Александр Лазаренко`
+    : `${slug} — кейс · Александр Лазаренко`;
+  const description = project?.summary ?? caseData?.problem ?? "";
   return {
-    title: `${project.title} — кейс · Александр Лазаренко`,
-    description: project.summary,
+    title,
+    description,
+    alternates: { canonical: `/projects/${slug}` },
     openGraph: {
-      title: project.title,
-      description: project.summary,
+      title,
+      description,
       type: "article",
     },
   };
@@ -70,9 +82,22 @@ export default async function CasePage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const project = projects.find((p) => p.slug === slug);
-  if (!project) notFound();
+  const found = projects.find((p) => p.slug === slug);
   const caseData = cases.find((c) => c.slug === slug);
+  if (!found && !caseData) notFound();
+  const project = found ?? {
+    slug,
+    index: "—",
+    title: caseData?.slug ?? slug,
+    summary: caseData?.problem ?? "",
+    stack: [],
+    links: [],
+    accent: "violet" as const,
+    year: 2025,
+    kind: "Архивный кейс",
+    role: "Frontend Developer",
+    status: "Входит в B2B web-product concept",
+  };
 
   return (
     <article style={{ padding: "var(--section-pad) 0" }}>
@@ -89,7 +114,9 @@ export default async function CasePage({
         >
           &larr; Назад к проектам
         </Link>
-        <div className="section-label">{project.index}</div>
+        <div className="section-label">
+          {project.kind ?? project.index} · {project.year}
+        </div>
         <h1
           style={{
             fontFamily: "var(--font-heading)",
@@ -106,36 +133,90 @@ export default async function CasePage({
             color: "var(--text-secondary)",
             fontSize: "1.1rem",
             lineHeight: 1.8,
-            marginBottom: "32px",
+            marginBottom: "16px",
+            maxWidth: "72ch",
           }}
         >
           {project.summary}
         </p>
-        <div className="project-tags" style={{ marginBottom: "32px" }}>
+        {(project.role || project.status) && (
+          <p style={{ color: "var(--text-secondary)", marginBottom: "32px" }}>
+            {project.role && <span>Роль: {project.role}</span>}
+            {project.role && project.status && <span> · </span>}
+            {project.status && <span>{project.status}</span>}
+          </p>
+        )}
+        <div className="project-tags" style={{ marginBottom: "16px" }}>
           {project.stack.map((tag) => (
             <span key={tag} className="project-tag">
               {tag}
             </span>
           ))}
         </div>
+        {caseData?.quality && caseData.quality.length > 0 && (
+          <div className="project-tags" style={{ marginBottom: "32px" }}>
+            {caseData.quality.map((q) => (
+              <span key={q} className="skill-tag">
+                ✓ {q}
+              </span>
+            ))}
+          </div>
+        )}
         <div className="project-links" style={{ marginBottom: "48px" }}>
           {project.links.map((link) => (
             <a
-              key={link.href}
+              key={link.href + link.label}
               href={link.href}
-              target="_blank"
-              rel="noopener noreferrer"
+              target={link.href.startsWith("/") ? undefined : "_blank"}
+              rel={link.href.startsWith("/") ? undefined : "noopener noreferrer"}
               className="project-link primary"
             >
-              {link.label}
+              {link.label === "Продукт" ? "Открыть продукт" : link.label}
             </a>
           ))}
+          <a
+            href={siteConfig.telegram}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="project-link"
+          >
+            Передать задачу
+          </a>
         </div>
+
+        {project.slug === "svobodno-online" && (
+          <div className="project-links" style={{ marginBottom: "48px" }}>
+            <a
+              href="https://свободно.online/demo-salon"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="project-link"
+            >
+              Демо салона
+            </a>
+            <a
+              href="https://свободно.online/partners/demo"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="project-link"
+            >
+              Демо партнёра
+            </a>
+            <a
+              href="https://свободно.online/gid"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="project-link"
+            >
+              Гид
+            </a>
+          </div>
+        )}
 
         {caseData ? (
           <div style={{ display: "flex", flexDirection: "column", gap: "48px" }}>
             <CaseSection title="Задача">{caseData.problem}</CaseSection>
-            <CaseSection title="Решение">{caseData.solution}</CaseSection>
+            <CaseSection title="Моя работа / Решение">{caseData.solution}</CaseSection>
             <CaseSection title="Архитектура">
               <ul style={{ listStyle: "none", padding: 0, display: "flex", flexDirection: "column", gap: "12px" }}>
                 {caseData.architecture.map((item) => (
@@ -164,7 +245,7 @@ export default async function CasePage({
                 ))}
               </ul>
             </CaseSection>
-            <CaseSection title="Результаты">
+            <CaseSection title="Результат">
               <ul style={{ listStyle: "none", padding: 0, display: "flex", flexDirection: "column", gap: "12px" }}>
                 {caseData.results.map((item) => (
                   <li
@@ -193,7 +274,7 @@ export default async function CasePage({
               </ul>
             </CaseSection>
             {caseData.highlights.length > 0 && (
-              <CaseSection title="Ключевые особенности">
+              <CaseSection title="Ключевые технические решения">
                 <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: "16px" }}>
                   {caseData.highlights.map((item) => (
                     <div
@@ -212,6 +293,26 @@ export default async function CasePage({
                     </div>
                   ))}
                 </div>
+              </CaseSection>
+            )}
+        {project.image && (
+          <div className="case-shot">
+            <Image
+              src={project.image}
+              alt={project.imageAlt ?? project.title}
+              width={1600}
+              height={1000}
+              priority
+              sizes="(max-width: 1200px) 100vw, 1200px"
+            />
+          </div>
+        )}
+
+        {project.slug === "svobodno-online" && (
+              <CaseSection title="Код">
+                <p style={{ color: "var(--text-secondary)", lineHeight: 1.8 }}>
+                  Исходный код закрыт; архитектуру и код могу показать отдельно.
+                </p>
               </CaseSection>
             )}
           </div>

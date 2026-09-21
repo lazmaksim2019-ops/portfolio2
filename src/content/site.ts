@@ -8,13 +8,14 @@ function siteUrl(): string {
 
 export const siteConfig = {
   name: "Александр Лазаренко",
-  title: "Александр Лазаренко — Fullstack-разработчик & Инженер по ИИ автоматизации",
+  title: "Александр Лазаренко — Fullstack / AI Developer | Web, Telegram, AI",
   description:
-    "Fullstack-разработчик и инженер по ИИ автоматизации. Python, FastAPI, Next.js, n8n, Gemini API. MVP под ключ.",
+    "Fullstack / AI разработчик. Веб-приложения, Telegram-боты и Mini Apps, AI-инструменты, API-интеграции и автоматизация бизнес-процессов.",
   email: "elektra-174@ya.ru",
   phone: "+7 912 796-25-03",
   telegram: "https://t.me/lazalex81",
+  telegramHandle: "@lazalex81",
   github: "https://github.com/lazmaksim2019-ops",
-  ogImage: "/og/og.png",
+  ogImage: "/og.png",
   url: siteUrl(),
 } as const;
