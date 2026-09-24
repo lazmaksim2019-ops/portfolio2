@@ -7,6 +7,7 @@ export function Footer() {
         <p>
           Александр Лазаренко · Fullstack / AI Developer
         </p>
+        <p className="footer-availability">{siteConfig.availability}</p>
         <p className="footer-links">
           <a href={siteConfig.telegram} target="_blank" rel="noopener noreferrer">
             Telegram

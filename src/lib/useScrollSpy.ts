@@ -2,10 +2,10 @@
 
 import { useEffect, useState } from "react";
 
-type Section = "projects" | "skills" | "process" | "formats" | "about" | "contact";
+export type Section = "projects" | "services" | "skills" | "process" | "about" | "contact";
 
 export function useScrollSpy(ids: readonly Section[]): Section {
-  const [active, setActive] = useState<Section>("about");
+  const [active, setActive] = useState<Section>("projects");
 
   useEffect(() => {
     const observer = new IntersectionObserver(

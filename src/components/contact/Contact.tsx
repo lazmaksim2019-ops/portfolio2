@@ -48,16 +48,15 @@ export function Contact() {
         </Reveal>
         <Reveal>
           <h2 className="section-title">
-            Есть задача? <span className="gradient-text">Передайте её мне</span>
+            Есть задача? <span className="gradient-text">Обсудим</span>
           </h2>
         </Reveal>
         <div className="contact-grid">
           <Reveal>
             <div className="contact-info">
-              <h3>Опишите, что нужно сделать</h3>
+              <h3>Быстрый контакт</h3>
               <p>
-                Можно прислать ТЗ, ссылку на существующий проект или просто
-                кратко описать проблему. Самый быстрый путь — Telegram.
+                Telegram — самый быстрый способ. {siteConfig.responseTime}.
               </p>
               <a
                 href={siteConfig.telegram}
@@ -65,10 +64,20 @@ export function Contact() {
                 rel="noopener noreferrer"
                 className="btn btn-primary"
               >
-                Передать задачу в Telegram
+                Обсудить задачу в Telegram →
               </a>
-              <p className="contact-handle">{siteConfig.telegramHandle}</p>
+              <p className="contact-handle">@{siteConfig.telegramHandle}</p>
+              <p className="contact-note">
+                Ищете сотрудника или подрядчика? Пришлите вакансию или описание
+                блока в Telegram — CV и ссылку на hh вышлю в ответ.
+              </p>
               <div className="contact-links">
+                <a
+                  href={`mailto:${siteConfig.email}`}
+                  className="contact-link"
+                >
+                  {siteConfig.email}
+                </a>
                 <a
                   href={siteConfig.github}
                   target="_blank"
@@ -83,6 +92,14 @@ export function Contact() {
           </Reveal>
           <Reveal>
             <form action={action} className="contact-form">
+              {pending && (
+                <div className="form-progress" aria-live="polite">
+                  <div className="form-progress-bar">
+                    <div className="form-progress-fill" />
+                  </div>
+                  <span className="form-progress-text">Отправка...</span>
+                </div>
+              )}
               <div className="form-group">
                 <label htmlFor="name">Имя</label>
                 <input
@@ -108,25 +125,24 @@ export function Contact() {
                 <textarea
                   id="message"
                   name="message"
-                  placeholder="Что нужно сделать? Ссылка, ТЗ или описание..."
+                  placeholder="Что нужно сделать?"
                   required
                 />
               </div>
               <button
                 type="submit"
-                className="btn btn-primary"
-                style={{ alignSelf: "flex-start" }}
+                className="btn btn-primary contact-submit"
                 disabled={pending}
               >
                 {pending ? "Отправка..." : "Отправить"}
               </button>
               {state?.ok && (
-                <p role="status" style={{ color: "#22C55E" }}>
+                <p role="status" className="form-status form-status-ok">
                   Спасибо! Свяжусь в ближайшее время.
                 </p>
               )}
               {state?.error && (
-                <p role="status" style={{ color: "#EF4444" }}>
+                <p role="status" className="form-status form-status-error">
                   {state.error}
                 </p>
               )}

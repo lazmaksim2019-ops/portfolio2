@@ -2,15 +2,13 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { cn } from "@/lib/utils";
+import type { Section } from "@/lib/useScrollSpy";
 import { siteConfig } from "@/content/site";
-
-type Section = "projects" | "skills" | "process" | "formats" | "about" | "contact";
 
 const navItems: { id: Section; label: string }[] = [
   { id: "projects", label: "Проекты" },
-  { id: "skills", label: "Что делаю" },
+  { id: "services", label: "Услуги" },
   { id: "process", label: "Как работаю" },
-  { id: "formats", label: "Форматы" },
   { id: "about", label: "Обо мне" },
   { id: "contact", label: "Контакты" },
 ];
@@ -40,22 +38,34 @@ export function Navbar({ activeSection }: { activeSection: Section }) {
                 <li key={item.id}>
                   <a
                     href={`#${item.id}`}
-                    style={{ color: activeSection === item.id ? "var(--text-primary)" : undefined }}
+                    className={activeSection === item.id ? "is-active" : undefined}
+                    aria-current={activeSection === item.id ? "true" : undefined}
                     onClick={closeMenu}
                   >
                     {item.label}
                   </a>
                 </li>
               ))}
+              <li className="nav-mobile-only">
+                <a
+                  href={siteConfig.telegram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="nav-cta nav-cta-drawer"
+                  onClick={closeMenu}
+                >
+                  Обсудить задачу
+                </a>
+              </li>
             </ul>
             <a
               href={siteConfig.telegram}
               target="_blank"
               rel="noopener noreferrer"
-              className="nav-cta"
+              className="nav-cta nav-cta-desktop"
               onClick={closeMenu}
             >
-              Передать задачу
+              Обсудить задачу
             </a>
           </div>
           <button

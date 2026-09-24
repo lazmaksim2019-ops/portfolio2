@@ -66,11 +66,11 @@ export function Skills() {
     <section id="skills">
       <div className="container">
         <Reveal>
-          <div className="section-label">Что делаю</div>
+          <div className="section-label">Стек</div>
         </Reveal>
         <Reveal>
           <h2 className="section-title">
-            Что можно <span className="gradient-text">мне передать</span>
+            Технологии, которыми <span className="gradient-text">владею</span>
           </h2>
         </Reveal>
         <div className="skills-bento">
